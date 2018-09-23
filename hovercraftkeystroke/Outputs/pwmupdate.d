@@ -1,0 +1,11 @@
+.\outputs\pwmupdate.o: Source\PWMupdate.c
+.\outputs\pwmupdate.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outputs\pwmupdate.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outputs\pwmupdate.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outputs\pwmupdate.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_memmap.h
+.\outputs\pwmupdate.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_gpio.h
+.\outputs\pwmupdate.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_sysctl.h
+.\outputs\pwmupdate.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_types.h
+.\outputs\pwmupdate.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_pwm.h
+.\outputs\pwmupdate.o: .\Headers\bitdefs.h
+.\outputs\pwmupdate.o: .\Headers\PWMupdate.h

@@ -1,0 +1,226 @@
+Project:
+Team 12 - MI6 Pseudocode
+
+Include headers
+Make #defines
+Declare module functions and variables
+
+Function InitMI6: Takes a priority variable, returns bool 
+Initializes the UART, Wide Timers for pin interrupts, GPIO ports, and A/D pins
+Set the current state to Idle
+
+Function PostMI6: Takes an event, returns bool
+	Posts the event and priority to the queue
+
+Function RunMI6: Takes an event, returns an event
+ 	Set nextState variable as the currentState
+	create an event
+	
+	Begin the state machine (IdleState, RequestPairingState, and MasterState)
+	IdleState:
+		If the event was ES_INIT, start the watch timer for initialization
+		If the event was a BeginPairing Event
+			check the event parameter for the team number, apply correction
+			LoadUpPairingRequest with the team number (sets the tx array)
+			SendXbeeData with the broadcast tx array (transmit data) 
+			Set the nextState to RequestPairingState
+			Start a communications timer for timeout (1 second)
+		If the event was ES_TIMEOUT
+			If the event parameter is PopTimer
+				Set the popStatus to true
+			If the parameter was WatchInitTimer
+				send an unpaired byte to the watch PIC
+			If the parameter was SobrietyTimer
+				set BAC to false
+			If the parameter was debounceTimer
+				set the debounce to false
+	
+	RequestPairingState:
+		If the event was PackageReceived
+			importData (store rx data in local memory)
+			check the API ID number, if 0x89, ignore it
+			check the data header for 0x02 and the pair ack byte for 0x01
+				if true, set the spectreAddrMSB and LSB to the rx source MSB and LSB
+				LoadUpControl (sets the control array values)
+				SendXbeeData with the tx control array (transmit data)
+				set nextState to MasterState
+				Start the communications timer (1 second)
+				Start the pulse timer (200 ms)
+		If the event was ES_TIMEOUT
+			If the event parameter was CommTimer
+				set nextState to IdleState
+			If the parameter was PopTimer
+				set the popStatus to true
+			If the parameter was debounceTimer
+				set the debounce to false
+		If the event was Unpair
+			set the nextState to IdleState
+		
+	MasterState:
+		If the event was PackageReceived
+			importData (store rx data in local memory)
+			If the rx API ID is 0x89
+				If the status acknowledge byte is NACK
+					set up a pseudo-timeout to simulate a pulse timeout, triggering a resend
+				If the status acknowledge byte is Successful
+					reset the Action Byte in the control array
+			If the header is not a status byte, break
+			If InitStatus value is 0xFF
+				Set InitStatus to the status byte of the rx data
+				send a byte to the PIC updating status LED
+			If the rx data status value is different from InitStatus
+				Set nextState to IdleState
+				set InitStatus to 0xFF
+				send a byte to the PIC updating status LED
+				start up the sobriety timer (5 seconds)
+		If the event type is ES_TIMEOUT
+			If the event parameter is CommTimer
+				set nextState to IdleState
+				send a byte to the PIC updating status LED
+				start up the sobriety timer (5 seconds)
+				set InitStatus to 0xFF
+			If the parameter is PulseTimer
+				check the BAC, if true
+					Read the ADC pins for thrust and orientaiton, set to 8bit resolution
+					adjust values for communication protocols
+				else
+					set the thrust and orentation value to 0
+				check the brake value, change the bit if necessary
+				LoadUpControl
+				SendXbeeData
+				restart the pulse timer
+			If the parameter is PopTimer, set the PopStatus to true
+			If the parameter is debounceTimer, set debounce to false
+		If the event type is Pop
+			If the gun is properly oriented, set the POP bit
+		If the event type is unpair
+			set the unpair bit 
+			LoadUpControl
+			SendXbeeData
+			set nextState to IdleState
+			set InitStatus to 0xFF
+			send a byte to the PIC updating status LED
+			start up the sobriety timer (5 seconds)
+	Set the currentState to NextState
+	Return the event
+			
+UART1InterruptResponse
+	if the response is from the Tx 
+		clear the flag
+		step through the next element in the array, sending the byte
+	if the response is from the Rx
+		clear the flag
+		create an event to send to CommRxSM
+		set the event parameter to the byte received
+		
+UART2InterruptResponse			
+	clear the flag
+	if debounce is false
+		if we're in the idleState
+			set up a beginPairing event with parameter of the byte received
+		if we're in masterState
+			send an unpair event 
+		set debounce to true
+		start debounceTimer(500ms)
+
+PopInterruptResponse
+	clear the flag
+	if popStatus is true
+		set popStatus false
+		start the pop timer
+		post a pop event to the state machine
+
+BrakeInterruptResponse
+	clear the flag
+	set brakeStatus to != brakeStatus
+
+FlaskInterruptResponse
+	clear the flag, set BAC to true
+	
+ImportData
+	set a pointer to the data from the CommRxSM
+	move the data to a local array 
+	
+checkSum
+	add each element in a given array
+	subtract value from 0xFF, return
+	
+LoadUpPairingRequest
+	Set each byte in the array to send as specified by the comm protocol for a pairing request
+	
+LoadUpControl
+	Set each byte in the array to send as specified by the comm protocol for a control packet
+	
+SendXbeeData
+	call the Uart1 interrupt response to begin transmission of the data
+
+InitInputCaptureWT1
+	Enable the clock to wide timer 1 using RCGCWTIMER_R1 register
+	Enable the clock to the appropriate GPIO module RCGCGPIO
+	Disable wtimer 1 timer A&B to configure with TAEN in TIMER_O_CTL register
+	Set timer to 32bit wide mode with TIMER_CFG_16_BIT in TIMER_O_CTL register
+	Set timer to use full 32bit count by setting TIMER_O_TAILR to 0xffffffff
+	Set timer A&B to capture mode for edge time and up-counting (Clear TAMMS and Set TACMR,TACDIR,TAMR_CAP in TIMERTAMR)
+	Set event to rising edge by clearing TAEVENT_M in TIMER_O_CTL (Rising edge = 00)
+	Select the alternate function for the Timer pins (AFSEL)
+	Configure the PMCn fields in the GPIOPCTL register to assign the WTIMER pins (WT1CCP0)
+	Enable appropriate pint on GPIO port for digital I/O (GPIODIR)
+	Set appropriate pins on GPIO as inputs (GPIODEN)
+	Locally enable interrupts for the capture interrupt mask (CAEIM in TIMERIMR)
+	Enable WTIMER1 Timer A&B interrupt vector in NVIC (96 = Bit 0 in NVIC_EN3) (Tiva p.104 for vector table)
+	Ensure interrupts are enabled globally (__enable_irq())
+	Enable WTIMER1 Timer A&B with TAEN in TIMER_O_CTL register
+			
+InitInputCaptureWT2
+	Enable the clock to wide timer 2 using RCGCWTIMER_R2 register
+	Enable the clock to the appropriate GPIO module RCGCGPIO
+	Disable wtimer 2 timer A&B to configure with TAEN in TIMER_O_CTL register
+	Set timer to 32bit wide mode with TIMER_CFG_16_BIT in TIMER_O_CTL register
+	Set timer to use full 32bit count by setting TIMER_O_TAILR to 0xffffffff
+	Set timer A&B to capture mode for edge time and up-counting (Clear TAMMS and Set TACMR,TACDIR,TAMR_CAP in TIMERTAMR)
+	Set event to rising edge by clearing TAEVENT_M in TIMER_O_CTL (Rising edge = 00)
+	Select the alternate function for the Timer pins (AFSEL)
+	Configure the PMCn fields in the GPIOPCTL register to assign the WTIMER pins (WT1CCP0)
+	Enable appropriate pint on GPIO port for digital I/O (GPIODIR)
+	Set appropriate pins on GPIO as inputs (GPIODEN)
+	Locally enable interrupts for the capture interrupt mask (CAEIM in TIMERIMR)
+	Enable WTIMER2 Timer A&B interrupt vector in NVIC (96 = Bit 0 in NVIC_EN3) (Tiva p.104 for vector table)
+	Ensure interrupts are enabled globally (__enable_irq())
+	Enable WTIMER2 Timer A&B with TAEN in TIMER_O_CTL register
+			
+InitInputCaptureWT3
+	Enable the clock to wide timer 3 using RCGCWTIMER_R3 register
+	Enable the clock to the appropriate GPIO module RCGCGPIO
+	Disable wtimer 3 timer A and B to configure with TAEN/TBEN in TIMER_O_CTL register
+	Set timer to 32bit wide mode with TIMER_CFG_16_BIT in TIMER_O_CTL register
+	Set timer to use full 32bit count by setting TIMER_O_TAILR to 0xffffffff
+	Set timer B to capture mode for edge time and up-counting (Clear TAMMS and Set TACMR,TACDIR,TAMR_CAP in TIMERTAMR)
+	Set event to rising edge by clearing TAEVENT_M/TBEVENT_M in TIMER_O_CTL (Rising edge = 00)
+	Select the alternate function for the Timer pins (AFSEL)
+	Configure the PMCn fields in the GPIOPCTL register to assign the WTIMER pins (WT3CCP0/WT3CCP1)
+	Enable appropriate pint on GPIO port for digital I/O (GPIODIR)
+	Set appropriate pins on GPIO as inputs (GPIODEN)
+	Locally enable interrupts for the capture interrupt mask (CAEIM in TIMERIMR)
+	Enable WTIMER3 Timer A and B interrupt vector in NVIC (96 = Bit 0 in NVIC_EN3) (Tiva p.104 for vector table)
+	Ensure interrupts are enabled globally (__enable_irq())
+	Enable WTIMER3 Timer A and B with TAEN in TIMER_O_CTL register			
+			
+InitGPIO
+	Enable port B timer
+	wait until it's ready
+	set pin B7 as digital output
+	Turn it off to start
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

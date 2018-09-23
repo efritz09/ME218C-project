@@ -1,0 +1,16 @@
+.\outputs\wtv020sd.o: Source\WTV020SD.c
+.\outputs\wtv020sd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\outputs\wtv020sd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\outputs\wtv020sd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\outputs\wtv020sd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\cmath
+.\outputs\wtv020sd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_memmap.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_gpio.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_timer.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_sysctl.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_types.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_ssi.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\inc/hw_nvic.h
+.\outputs\wtv020sd.o: C:\ti\TivaWare_C_Series-2.1.0.12573\driverlib/ssi.h
+.\outputs\wtv020sd.o: .\Headers\bitdefs.h
+.\outputs\wtv020sd.o: .\Headers\WTV020SD.h

@@ -1,0 +1,77 @@
+Project:
+Team 12 - CommRxSM Pseudocode
+
+Include headers
+Make #defines
+Declare module functions and variables
+
+InitCommRxSM
+	set currentState as WaitForStartState
+	Send ES_INIT event
+
+PostCommRxSM
+	posts the event to the queue
+	
+RunCommRxSM
+	set nextState to currentState
+	create a ES_NO_EVENT event
+	
+	WaitForStartState:
+		if the event was ByteReceived
+			if the parameter was START_DELIMETER
+				set NextState to WaitForMSBState
+				start the RxTimer for a comms timeout
+	
+	WaitForMSBState
+		if the event was ByteReceived
+			store the event param in dataLen, bitshifted 8 places
+			set NextState to WaitForLSBState
+			start the RxTimer for a comms timeout
+		if the event was ES_TIMEOUT and param was RxTimer
+			set NextState to WaitForStartState
+	
+	WaitForMSBState
+		if the event was ByteReceived
+			set dataLen += the event parameter
+			set NextState to ProcessDataState
+			start the RxTimer for a comms timeout
+		if the event was ES_TIMEOUT and param was RxTimer
+			set NextState to WaitForStartState
+			
+	ProcessDataState
+		if the event was ByteReceived
+			start the RxTimer for a comms timeout
+			if dataLen is greater than our current arrayIndex
+				store the param in the current arrayIndex
+				increment arrayIndex
+				add the value to the checksum
+			if dataLen is equal to arrayIndex
+				reset arrayIndex
+				if the checksums match
+					set up a PackageReceived event, post it
+				set NextState to WaitForStartState
+				reset checksum and arrayIndex
+				
+		if the event was ES_TIMEOUT and param was RxTimer
+			set NextState to WaitForStartState	
+			reset arrayIndex
+			
+	set currentstate to nextState
+	return the event
+	
+GetRxData
+	return a pointer to the rxData array
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
