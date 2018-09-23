@@ -1,0 +1,1275 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<title>Static Call Graph - [.\Outputs\BaseTarget.axf]</title></head>
+<body><HR>
+<H1>Static Call Graph for image .\Outputs\BaseTarget.axf</H1><HR>
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sun May 31 16:56:25 2015
+<BR><P>
+<H3>Maximum Stack Usage =        152 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+Call chain for Maximum Stack Depth:</H3>
+RunBalloon &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<P>
+<H3>
+Functions with no stack information
+</H3><UL>
+ <LI><a href="#[20]">Reset_Handler</a>
+ <LI><a href="#[46]">__user_initial_stackheap</a>
+ <LI><a href="#[3]">NmiSR</a>
+ <LI><a href="#[4]">FaultISR</a>
+ <LI><a href="#[5]">IntDefaultHandler</a>
+</UL>
+</UL>
+<P>
+<H3>
+Mutually Recursive functions
+</H3> <LI><a href="#[1a]">RunWTV</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1a]">RunWTV</a><BR>
+ <LI><a href="#[82]">UARTCharPut</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[82]">UARTCharPut</a><BR>
+ <LI><a href="#[3]">NmiSR</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[3]">NmiSR</a><BR>
+ <LI><a href="#[4]">FaultISR</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[4]">FaultISR</a><BR>
+ <LI><a href="#[5]">IntDefaultHandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[5]">IntDefaultHandler</a><BR>
+ <LI><a href="#[37]">SysCtlDelay</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[37]">SysCtlDelay</a><BR>
+ <LI><a href="#[36]">_sys_exit</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[36]">_sys_exit</a><BR>
+</UL>
+<P>
+<H3>
+Function Pointers
+</H3><UL>
+ <LI><a href="#[e]">Check4Keystroke</a> from eventcheckers.o(i.Check4Keystroke) referenced from es_checkevents.o(.constdata)
+ <LI><a href="#[4]">FaultISR</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[15]">InitBalloon</a> from balloon.o(i.InitBalloon) referenced from es_framework.o(.constdata)
+ <LI><a href="#[13]">InitCommRxSM</a> from commrxsm.o(i.InitCommRxSM) referenced from es_framework.o(.constdata)
+ <LI><a href="#[11]">InitMotorDriver</a> from motordriver.o(i.InitMotorDriver) referenced from es_framework.o(.constdata)
+ <LI><a href="#[17]">InitSensorComms</a> from sensorcomms.o(i.InitSensorComms) referenced from es_framework.o(.constdata)
+ <LI><a href="#[f]">InitSpectreXbee</a> from spectrexbee.o(i.InitSpectreXbee) referenced from es_framework.o(.constdata)
+ <LI><a href="#[19]">InitWTV</a> from wtv020sdservice.o(i.InitWTV) referenced from es_framework.o(.constdata)
+ <LI><a href="#[a]">InputCaptureResponse</a> from spectrexbee.o(i.InputCaptureResponse) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[5]">IntDefaultHandler</a> from startup_rvmdk.o(RESET) referenced 108 times from startup_rvmdk.o(RESET)
+ <LI><a href="#[3]">NmiSR</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[1d]">PostBalloon</a> from balloon.o(i.PostBalloon) referenced from es_timers.o(.constdata)
+ <LI><a href="#[1b]">PostCommRxSM</a> from commrxsm.o(i.PostCommRxSM) referenced from es_timers.o(.constdata)
+ <LI><a href="#[1e]">PostSensorComms</a> from sensorcomms.o(i.PostSensorComms) referenced from es_timers.o(.constdata)
+ <LI><a href="#[1c]">PostSpectreXbee</a> from spectrexbee.o(i.PostSpectreXbee) referenced 2 times from es_timers.o(.constdata)
+ <LI><a href="#[1f]">PostWTV</a> from wtv020sdservice.o(i.PostWTV) referenced from es_timers.o(.constdata)
+ <LI><a href="#[20]">Reset_Handler</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[16]">RunBalloon</a> from balloon.o(i.RunBalloon) referenced from es_framework.o(.constdata)
+ <LI><a href="#[14]">RunCommRxSM</a> from commrxsm.o(i.RunCommRxSM) referenced from es_framework.o(.constdata)
+ <LI><a href="#[12]">RunMotorDriver</a> from motordriver.o(i.RunMotorDriver) referenced from es_framework.o(.constdata)
+ <LI><a href="#[18]">RunSensorComms</a> from sensorcomms.o(i.RunSensorComms) referenced from es_framework.o(.constdata)
+ <LI><a href="#[10]">RunSpectreXbee</a> from spectrexbee.o(i.RunSpectreXbee) referenced from es_framework.o(.constdata)
+ <LI><a href="#[1a]">RunWTV</a> from wtv020sdservice.o(i.RunWTV) referenced from es_framework.o(.constdata)
+ <LI><a href="#[b]">SoftwareReset</a> from spectrexbee.o(i.SoftwareReset) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[6]">SysTickIntHandler</a> from es_port.o(i.SysTickIntHandler) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[7]">UART1InterruptResponse</a> from spectrexbee.o(i.UART1InterruptResponse) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[8]">UART2ISR</a> from sensorcomms.o(i.UART2ISR) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[9]">WTVInterruptResponse</a> from wtv020sdservice.o(i.WTVInterruptResponse) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[d]">_printf_input_char</a> from _printf_char_common.o(.text) referenced from _printf_char_common.o(.text)
+ <LI><a href="#[c]">fputc</a> from retarget.o(i.fputc) referenced from _printf_char_file.o(.text)
+</UL>
+<P>
+<H3>
+Global Symbols
+</H3>
+<P><STRONG><a name="[20]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+</UL>
+
+<P><STRONG><a name="[21]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
+<BR><BR>[Calls]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+<BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[22]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
+<BR><BR>[Called By]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+</UL>
+
+<P><STRONG><a name="[24]"></a>__scatterload_rt2</STRONG> (Thumb, 44 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+</UL>
+
+<P><STRONG><a name="[96]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+
+<P><STRONG><a name="[97]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+
+<P><STRONG><a name="[25]"></a>__scatterload_copy</STRONG> (Thumb, 26 bytes, Stack size unknown bytes, __scatter_copy.o(!!handler_copy), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
+</UL>
+
+<P><STRONG><a name="[98]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
+
+<P><STRONG><a name="[3b]"></a>_printf_percent</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_percent.o(.ARM.Collect$$_printf_percent$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__printf
+</UL>
+
+<P><STRONG><a name="[26]"></a>_printf_x</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_x.o(.ARM.Collect$$_printf_percent$$0000000C))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
+<LI>Call Chain = _printf_x &rArr; _printf_int_hex &rArr; _printf_int_common
+</UL>
+<BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_hex
+</UL>
+
+<P><STRONG><a name="[28]"></a>_printf_s</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_s.o(.ARM.Collect$$_printf_percent$$00000014))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
+<LI>Call Chain = _printf_s &rArr; _printf_string &rArr; _printf_cs_common &rArr; _printf_str
+</UL>
+<BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_string
+</UL>
+
+<P><STRONG><a name="[99]"></a>_printf_percent_end</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, _printf_percent_end.o(.ARM.Collect$$_printf_percent$$00000017))
+
+<P><STRONG><a name="[2f]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
+</UL>
+
+<P><STRONG><a name="[2a]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000001))
+<BR><BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_init
+</UL>
+
+<P><STRONG><a name="[9a]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
+
+<P><STRONG><a name="[9b]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
+
+<P><STRONG><a name="[9c]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
+
+<P><STRONG><a name="[9d]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
+
+<P><STRONG><a name="[9e]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
+
+<P><STRONG><a name="[9f]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
+
+<P><STRONG><a name="[a0]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
+
+<P><STRONG><a name="[a1]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
+
+<P><STRONG><a name="[a2]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
+
+<P><STRONG><a name="[a3]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
+
+<P><STRONG><a name="[a4]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
+
+<P><STRONG><a name="[a5]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
+
+<P><STRONG><a name="[a6]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
+
+<P><STRONG><a name="[a7]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
+
+<P><STRONG><a name="[a8]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
+
+<P><STRONG><a name="[a9]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
+
+<P><STRONG><a name="[aa]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000033))
+
+<P><STRONG><a name="[ab]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
+
+<P><STRONG><a name="[ac]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
+
+<P><STRONG><a name="[ad]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
+
+<P><STRONG><a name="[34]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
+</UL>
+
+<P><STRONG><a name="[ae]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000006))
+
+<P><STRONG><a name="[af]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E))
+
+<P><STRONG><a name="[b0]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+
+<P><STRONG><a name="[b1]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000009))
+
+<P><STRONG><a name="[b2]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000003))
+
+<P><STRONG><a name="[b3]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000B))
+
+<P><STRONG><a name="[23]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
+</UL>
+
+<P><STRONG><a name="[b4]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+
+<P><STRONG><a name="[2c]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry4.o(.ARM.Collect$$rtentry$$00000004))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_sh &rArr; __user_setup_stackheap
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[2e]"></a>__rt_entry_li</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000A))
+<BR><BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init
+</UL>
+
+<P><STRONG><a name="[b5]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
+
+<P><STRONG><a name="[30]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+</UL>
+
+<P><STRONG><a name="[b6]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
+
+<P><STRONG><a name="[47]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+</UL>
+
+<P><STRONG><a name="[33]"></a>__rt_exit_ls</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000003))
+<BR><BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
+</UL>
+
+<P><STRONG><a name="[b7]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
+
+<P><STRONG><a name="[35]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+</UL>
+
+<P><STRONG><a name="[37]"></a>SysCtlDelay</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sysctl.o(.emb_text))
+<BR><BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockSet
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+
+<P><STRONG><a name="[b8]"></a>CPUcpsid</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, cpu.o(.emb_text), UNUSED)
+
+<P><STRONG><a name="[b9]"></a>CPUprimask</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, cpu.o(.emb_text), UNUSED)
+
+<P><STRONG><a name="[68]"></a>CPUcpsie</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, cpu.o(.emb_text))
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntMasterEnable
+</UL>
+
+<P><STRONG><a name="[ba]"></a>CPUwfi</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, cpu.o(.emb_text), UNUSED)
+
+<P><STRONG><a name="[bb]"></a>CPUbasepriSet</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, cpu.o(.emb_text), UNUSED)
+
+<P><STRONG><a name="[bc]"></a>CPUbasepriGet</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, cpu.o(.emb_text), UNUSED)
+
+<P><STRONG><a name="[46]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[bd]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[be]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[38]"></a>__2printf</STRONG> (Thumb, 20 bytes, Stack size 24 bytes, noretval__2printf.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
+<LI>Call Chain = __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitMotorDriver
+<LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitWTV
+<LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunBalloon
+<LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitBalloon
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunCommRxSM
+<LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitCommRxSM
+<LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUART
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitInputCaptureWT1
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUART2
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitPWM
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3a]"></a>__printf</STRONG> (Thumb, 104 bytes, Stack size 24 bytes, __printf.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
+<LI>Call Chain = __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_percent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
+</UL>
+
+<P><STRONG><a name="[41]"></a>_printf_str</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, _printf_str.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = _printf_str
+</UL>
+<BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_cs_common
+</UL>
+
+<P><STRONG><a name="[27]"></a>_printf_int_hex</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, _printf_hex_int.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = _printf_int_hex &rArr; _printf_int_common
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_common
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_x
+</UL>
+
+<P><STRONG><a name="[bf]"></a>_printf_longlong_hex</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, _printf_hex_int.o(.text), UNUSED)
+
+<P><STRONG><a name="[3d]"></a>getc</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, getc.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getc &rArr; fgetc &rArr; TERMIO_GetChar &rArr; UARTgetc
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fgetc
+</UL>
+<BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+
+<P><STRONG><a name="[3f]"></a>puts</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, puts.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = puts &rArr; fputc
+</UL>
+<BR>[Calls]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[c0]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[c1]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[c2]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[3c]"></a>_printf_int_common</STRONG> (Thumb, 178 bytes, Stack size 32 bytes, _printf_intcommon.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = _printf_int_common
+</UL>
+<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_hex
+</UL>
+
+<P><STRONG><a name="[40]"></a>_printf_cs_common</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, _printf_char.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = _printf_cs_common &rArr; _printf_str
+</UL>
+<BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_str
+</UL>
+<BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_string
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char
+</UL>
+
+<P><STRONG><a name="[42]"></a>_printf_char</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, _printf_char.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_cs_common
+</UL>
+
+<P><STRONG><a name="[29]"></a>_printf_string</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, _printf_char.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = _printf_string &rArr; _printf_cs_common &rArr; _printf_str
+</UL>
+<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_cs_common
+</UL>
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_s
+</UL>
+
+<P><STRONG><a name="[39]"></a>_printf_char_file</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, _printf_char_file.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
+<LI>Call Chain = _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ferror
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+
+<P><STRONG><a name="[43]"></a>_printf_char_common</STRONG> (Thumb, 32 bytes, Stack size 64 bytes, _printf_char_common.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
+<LI>Call Chain = _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
+</UL>
+
+<P><STRONG><a name="[2d]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = __user_setup_stackheap
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
+</UL>
+
+<P><STRONG><a name="[32]"></a>exit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, exit.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[c3]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+
+<P><STRONG><a name="[45]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[c4]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+
+<P><STRONG><a name="[4f]"></a>CPUgetPRIMASK_cpsid</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, es_port.o(i.CPUgetPRIMASK_cpsid))
+<BR><BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_EnQueueFIFO
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_DeQueue
+</UL>
+
+<P><STRONG><a name="[50]"></a>CPUsetPRIMASK</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, es_port.o(i.CPUsetPRIMASK))
+<BR><BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_EnQueueFIFO
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_DeQueue
+</UL>
+
+<P><STRONG><a name="[e]"></a>Check4Keystroke</STRONG> (Thumb, 378 bytes, Stack size 16 bytes, eventcheckers.o(i.Check4Keystroke))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = Check4Keystroke &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;openSuicideDoors
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;kbhit
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSuicideDoors
+<LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoftwareReset
+<LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostWTV
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSpectreXbee
+<LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSensorComms
+<LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostCommRxSM
+<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostBalloon
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getc
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_checkevents.o(.constdata)
+</UL>
+<P><STRONG><a name="[59]"></a>ES_CheckUserEvents</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, es_checkevents.o(i.ES_CheckUserEvents))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ES_CheckUserEvents
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Run
+</UL>
+
+<P><STRONG><a name="[4e]"></a>ES_DeQueue</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, es_queue.o(i.ES_DeQueue))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ES_DeQueue
+</UL>
+<BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPUsetPRIMASK
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPUgetPRIMASK_cpsid
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Run
+</UL>
+
+<P><STRONG><a name="[51]"></a>ES_EnQueueFIFO</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, es_queue.o(i.ES_EnQueueFIFO))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPUsetPRIMASK
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPUgetPRIMASK_cpsid
+</UL>
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+
+<P><STRONG><a name="[57]"></a>ES_GetMSBitSet</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, es_lookuptables.o(i.ES_GetMSBitSet))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ES_GetMSBitSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_Tick_Resp
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Run
+</UL>
+
+<P><STRONG><a name="[54]"></a>ES_InitQueue</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, es_queue.o(i.ES_InitQueue))
+<BR><BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Initialize
+</UL>
+
+<P><STRONG><a name="[52]"></a>ES_Initialize</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, es_framework.o(i.ES_Initialize))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = ES_Initialize &rArr; ES_Timer_Init &rArr; _HW_Timer_Init &rArr; IntMasterEnable
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_Init
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_InitQueue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[55]"></a>ES_PostToService</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, es_framework.o(i.ES_PostToService))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_EnQueueFIFO
+</UL>
+<BR>[Called By]<UL><LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitMotorDriver
+<LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitWTV
+<LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitBalloon
+<LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitCommRxSM
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostMotorDriver
+<LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+<LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSensorComms
+<LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostWTV
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSpectreXbee
+<LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSensorComms
+<LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostCommRxSM
+<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostBalloon
+</UL>
+
+<P><STRONG><a name="[56]"></a>ES_Run</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, es_framework.o(i.ES_Run))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ES_Run &rArr; _HW_Process_Pending_Ints &rArr; ES_Timer_Tick_Resp &rArr; ES_GetMSBitSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Process_Pending_Ints
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_GetMSBitSet
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_DeQueue
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_CheckUserEvents
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[53]"></a>ES_Timer_Init</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, es_timers.o(i.ES_Timer_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ES_Timer_Init &rArr; _HW_Timer_Init &rArr; IntMasterEnable
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Timer_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Initialize
+</UL>
+
+<P><STRONG><a name="[4d]"></a>ES_Timer_InitTimer</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, es_timers.o(i.ES_Timer_InitTimer))
+<BR><BR>[Called By]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunWTV
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DuringTransferring
+<LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunBalloon
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunCommRxSM
+<LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[6d]"></a>ES_Timer_StopTimer</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, es_timers.o(i.ES_Timer_StopTimer))
+<BR><BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunCommRxSM
+<LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[5b]"></a>ES_Timer_Tick_Resp</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, es_timers.o(i.ES_Timer_Tick_Resp))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ES_Timer_Tick_Resp &rArr; ES_GetMSBitSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_GetMSBitSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Process_Pending_Ints
+</UL>
+
+<P><STRONG><a name="[5d]"></a>GPIODirModeSet</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, gpio.o(i.GPIODirModeSet))
+<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
+</UL>
+
+<P><STRONG><a name="[5e]"></a>GPIOPadConfigSet</STRONG> (Thumb, 314 bytes, Stack size 28 bytes, gpio.o(i.GPIOPadConfigSet))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = GPIOPadConfigSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
+</UL>
+
+<P><STRONG><a name="[7e]"></a>GPIOPinConfigure</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, gpio.o(i.GPIOPinConfigure))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_Init
+</UL>
+
+<P><STRONG><a name="[5c]"></a>GPIOPinTypeUART</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeUART))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = GPIOPinTypeUART &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_Init
+</UL>
+
+<P><STRONG><a name="[89]"></a>GetCommands</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, spectrexbee.o(i.GetCommands))
+<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;importControl
+</UL>
+
+<P><STRONG><a name="[8a]"></a>GetRxData</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, commrxsm.o(i.GetRxData))
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;importData
+</UL>
+
+<P><STRONG><a name="[15]"></a>InitBalloon</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, balloon.o(i.InitBalloon))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
+<LI>Call Chain = InitBalloon &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[13]"></a>InitCommRxSM</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, commrxsm.o(i.InitCommRxSM))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
+<LI>Call Chain = InitCommRxSM &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[11]"></a>InitMotorDriver</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, motordriver.o(i.InitMotorDriver))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = InitMotorDriver &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[61]"></a>InitPWM</STRONG> (Thumb, 512 bytes, Stack size 8 bytes, pwm.o(i.InitPWM))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
+<LI>Call Chain = InitPWM &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMDuty
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+</UL>
+
+<P><STRONG><a name="[17]"></a>InitSensorComms</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, sensorcomms.o(i.InitSensorComms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = InitSensorComms &rArr; InitUART2 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUART2
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[f]"></a>InitSpectreXbee</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, spectrexbee.o(i.InitSpectreXbee))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = InitSpectreXbee &rArr; InitPWM &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PlaySound
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUART
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitInputCaptureWT1
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitPWM
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;openSuicideDoors
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[63]"></a>InitUART2</STRONG> (Thumb, 170 bytes, Stack size 8 bytes, sensorcomms.o(i.InitUART2))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
+<LI>Call Chain = InitUART2 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSensorComms
+</UL>
+
+<P><STRONG><a name="[19]"></a>InitWTV</STRONG> (Thumb, 102 bytes, Stack size 8 bytes, wtv020sdservice.o(i.InitWTV))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
+<LI>Call Chain = InitWTV &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitWideTimer0
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[a]"></a>InputCaptureResponse</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, spectrexbee.o(i.InputCaptureResponse))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = InputCaptureResponse &rArr; PostSpectreXbee &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSpectreXbee
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[67]"></a>IntMasterEnable</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, interrupt.o(i.IntMasterEnable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IntMasterEnable
+</UL>
+<BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CPUcpsie
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Timer_Init
+</UL>
+
+<P><STRONG><a name="[65]"></a>PlaySound</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, wtv020sdservice.o(i.PlaySound))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PlaySound &rArr; PostWTV &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostWTV
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+<LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+</UL>
+
+<P><STRONG><a name="[1d]"></a>PostBalloon</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, balloon.o(i.PostBalloon))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PostBalloon &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_timers.o(.constdata)
+</UL>
+<P><STRONG><a name="[1b]"></a>PostCommRxSM</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, commrxsm.o(i.PostCommRxSM))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PostCommRxSM &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1InterruptResponse
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_timers.o(.constdata)
+</UL>
+<P><STRONG><a name="[6c]"></a>PostMotorDriver</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, motordriver.o(i.PostMotorDriver))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PostMotorDriver &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[1e]"></a>PostSensorComms</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, sensorcomms.o(i.PostSensorComms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PostSensorComms &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+<BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSensorComms
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_timers.o(.constdata)
+</UL>
+<P><STRONG><a name="[1c]"></a>PostSpectreXbee</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, spectrexbee.o(i.PostSpectreXbee))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PostSpectreXbee &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+<BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunCommRxSM
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InputCaptureResponse
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_timers.o(.constdata)
+</UL>
+<P><STRONG><a name="[1f]"></a>PostWTV</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, wtv020sdservice.o(i.PostWTV))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PostWTV &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_PostToService
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WTVInterruptResponse
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PlaySound
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_timers.o(.constdata)
+</UL>
+<P><STRONG><a name="[16]"></a>RunBalloon</STRONG> (Thumb, 168 bytes, Stack size 24 bytes, balloon.o(i.RunBalloon))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = RunBalloon &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_InitTimer
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[14]"></a>RunCommRxSM</STRONG> (Thumb, 216 bytes, Stack size 24 bytes, commrxsm.o(i.RunCommRxSM))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = RunCommRxSM &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_StopTimer
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_InitTimer
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSpectreXbee
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[12]"></a>RunMotorDriver</STRONG> (Thumb, 298 bytes, Stack size 24 bytes, motordriver.o(i.RunMotorDriver))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = RunMotorDriver &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeThrust
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeOrient
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;importControl
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[18]"></a>RunSensorComms</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, sensorcomms.o(i.RunSensorComms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = RunSensorComms &rArr; calc &rArr; __aeabi_ddiv
+</UL>
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc
+<LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostSensorComms
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[10]"></a>RunSpectreXbee</STRONG> (Thumb, 386 bytes, Stack size 32 bytes, spectrexbee.o(i.RunSpectreXbee))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = RunSpectreXbee &rArr; SendXbeeData &rArr; UART1InterruptResponse &rArr; PostCommRxSM &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostMotorDriver
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PlaySound
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_StopTimer
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_InitTimer
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;importData
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendXbeeData
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadUpStatus
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadUpConfirmation
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;openSuicideDoors
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSuicideDoors
+<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostBalloon
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[1a]"></a>RunWTV</STRONG> (Thumb, 236 bytes, Stack size 24 bytes, wtv020sdservice.o(i.RunWTV))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40 + In Cycle
+<LI>Call Chain = RunWTV &rArr;  RunWTV (Cycle)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunWTV
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DuringTransferring
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_InitTimer
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunWTV
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> es_framework.o(.constdata)
+</UL>
+<P><STRONG><a name="[62]"></a>SetPWMDuty</STRONG> (Thumb, 256 bytes, Stack size 8 bytes, pwm.o(i.SetPWMDuty))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SetPWMDuty
+</UL>
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitPWM
+</UL>
+
+<P><STRONG><a name="[5f]"></a>SetPWMWidth</STRONG> (Thumb, 332 bytes, Stack size 8 bytes, pwm.o(i.SetPWMWidth))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SetPWMWidth
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitMotorDriver
+<LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunBalloon
+<LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitBalloon
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitPWM
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;openSuicideDoors
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;closeSuicideDoors
+</UL>
+
+<P><STRONG><a name="[b]"></a>SoftwareReset</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, spectrexbee.o(i.SoftwareReset))
+<BR><BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlReset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[79]"></a>SysCtlClockSet</STRONG> (Thumb, 270 bytes, Stack size 8 bytes, sysctl.o(i.SysCtlClockSet))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SysCtlClockSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[7d]"></a>SysCtlPeripheralEnable</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sysctl.o(i.SysCtlPeripheralEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_Init
+</UL>
+
+<P><STRONG><a name="[78]"></a>SysCtlReset</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sysctl.o(i.SysCtlReset))
+<BR><BR>[Called By]<UL><LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoftwareReset
+</UL>
+
+<P><STRONG><a name="[86]"></a>SysTickEnable</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, systick.o(i.SysTickEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Timer_Init
+</UL>
+
+<P><STRONG><a name="[85]"></a>SysTickIntEnable</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, systick.o(i.SysTickIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Timer_Init
+</UL>
+
+<P><STRONG><a name="[6]"></a>SysTickIntHandler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, es_port.o(i.SysTickIntHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[84]"></a>SysTickPeriodSet</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, systick.o(i.SysTickPeriodSet))
+<BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_HW_Timer_Init
+</UL>
+
+<P><STRONG><a name="[7a]"></a>TERMIO_GetChar</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, termio.o(i.TERMIO_GetChar))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TERMIO_GetChar &rArr; UARTgetc
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTgetc
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fgetc
+</UL>
+
+<P><STRONG><a name="[7c]"></a>TERMIO_Init</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, termio.o(i.TERMIO_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = TERMIO_Init &rArr; GPIOPinTypeUART &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTStdioConfig
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTClockSourceSet
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[81]"></a>TERMIO_PutChar</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, termio.o(i.TERMIO_PutChar))
+<BR><BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharPut
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
+</UL>
+
+<P><STRONG><a name="[7]"></a>UART1InterruptResponse</STRONG> (Thumb, 98 bytes, Stack size 8 bytes, spectrexbee.o(i.UART1InterruptResponse))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = UART1InterruptResponse &rArr; PostCommRxSM &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostCommRxSM
+</UL>
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendXbeeData
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[8]"></a>UART2ISR</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, sensorcomms.o(i.UART2ISR))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = UART2ISR &rArr; calc &rArr; __aeabi_ddiv
+</UL>
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[82]"></a>UARTCharPut</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, uart.o(i.UARTCharPut))
+<BR><BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharPut
+</UL>
+<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharPut
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_PutChar
+</UL>
+
+<P><STRONG><a name="[7f]"></a>UARTClockSourceSet</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, uart.o(i.UARTClockSourceSet))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_Init
+</UL>
+
+<P><STRONG><a name="[80]"></a>UARTStdioConfig</STRONG> (Thumb, 82 bytes, Stack size 32 bytes, uartstdio.o(i.UARTStdioConfig))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = UARTStdioConfig
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_Init
+</UL>
+
+<P><STRONG><a name="[7b]"></a>UARTgetc</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, uartstdio.o(i.UARTgetc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = UARTgetc
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_GetChar
+</UL>
+
+<P><STRONG><a name="[9]"></a>WTVInterruptResponse</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, wtv020sdservice.o(i.WTVInterruptResponse))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = WTVInterruptResponse &rArr; PostWTV &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PostWTV
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[58]"></a>_HW_Process_Pending_Ints</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, es_port.o(i._HW_Process_Pending_Ints))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = _HW_Process_Pending_Ints &rArr; ES_Timer_Tick_Resp &rArr; ES_GetMSBitSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_Tick_Resp
+</UL>
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Run
+</UL>
+
+<P><STRONG><a name="[5a]"></a>_HW_Timer_Init</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, es_port.o(i._HW_Timer_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = _HW_Timer_Init &rArr; IntMasterEnable
+</UL>
+<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickPeriodSet
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickIntEnable
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickEnable
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntMasterEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_Init
+</UL>
+
+<P><STRONG><a name="[36]"></a>_sys_exit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, retarget.o(i._sys_exit))
+<BR><BR>[Calls]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+<LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
+</UL>
+
+<P><STRONG><a name="[75]"></a>calc</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, sensorcomms.o(i.calc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = calc &rArr; __aeabi_ddiv
+</UL>
+<BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dneg
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART2ISR
+<LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSensorComms
+</UL>
+
+<P><STRONG><a name="[6a]"></a>checkSum</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, spectrexbee.o(i.checkSum))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = checkSum
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadUpStatus
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadUpConfirmation
+</UL>
+
+<P><STRONG><a name="[49]"></a>closeSuicideDoors</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, suicideds.o(i.closeSuicideDoors))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = closeSuicideDoors &rArr; SetPWMWidth
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+
+<P><STRONG><a name="[44]"></a>ferror</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, retarget.o(i.ferror))
+<BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
+</UL>
+
+<P><STRONG><a name="[3e]"></a>fgetc</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, retarget.o(i.fgetc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = fgetc &rArr; TERMIO_GetChar &rArr; UARTgetc
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_GetChar
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getc
+</UL>
+
+<P><STRONG><a name="[c]"></a>fputc</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, retarget.o(i.fputc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = fputc
+</UL>
+<BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_PutChar
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> _printf_char_file.o(.text)
+</UL>
+<P><STRONG><a name="[71]"></a>getYaw</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sensorcomms.o(i.getYaw))
+<BR><BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+</UL>
+
+<P><STRONG><a name="[48]"></a>kbhit</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, termio.o(i.kbhit))
+<BR><BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+
+<P><STRONG><a name="[31]"></a>main</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
+<LI>Call Chain = main &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TERMIO_Init
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockSet
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Run
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Initialize
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[4a]"></a>openSuicideDoors</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, suicideds.o(i.openSuicideDoors))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = openSuicideDoors &rArr; SetPWMWidth
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWMWidth
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+<LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check4Keystroke
+</UL>
+
+<P><STRONG><a name="[87]"></a>__aeabi_dneg</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, basic.o(x$fpl$basic))
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc
+</UL>
+
+<P><STRONG><a name="[c5]"></a>_dneg</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[c6]"></a>__aeabi_fneg</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[c7]"></a>_fneg</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[c8]"></a>_dabs</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[c9]"></a>_fabs</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[8c]"></a>__aeabi_dadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_dadd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeOrient
+</UL>
+
+<P><STRONG><a name="[8d]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
+</UL>
+
+<P><STRONG><a name="[88]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
+</UL>
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc
+</UL>
+
+<P><STRONG><a name="[91]"></a>_ddiv</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[8b]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2uiz
+</UL>
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeOrient
+</UL>
+
+<P><STRONG><a name="[92]"></a>_dfixu</STRONG> (Thumb, 90 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[73]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
+<BR><BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;importControl
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc
+</UL>
+
+<P><STRONG><a name="[ca]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
+
+<P><STRONG><a name="[83]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
+<BR><BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeOrient
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc
+<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART2ISR
+</UL>
+
+<P><STRONG><a name="[cb]"></a>_dfltu</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu), UNUSED)
+
+<P><STRONG><a name="[70]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dmul
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;importControl
+</UL>
+
+<P><STRONG><a name="[93]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[90]"></a>__fpl_dnaninf</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, dnaninf.o(x$fpl$dnaninf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dfixu
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+</UL>
+
+<P><STRONG><a name="[8f]"></a>__fpl_dretinf</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, dretinf.o(x$fpl$dretinf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+</UL>
+
+<P><STRONG><a name="[72]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dsub
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeOrient
+</UL>
+
+<P><STRONG><a name="[94]"></a>_dsub</STRONG> (Thumb, 464 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
+</UL>
+
+<P><STRONG><a name="[2b]"></a>_fp_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
+<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_fp_1
+</UL>
+
+<P><STRONG><a name="[cc]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+
+<P><STRONG><a name="[cd]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P>
+<H3>
+Local Symbols
+</H3>
+<P><STRONG><a name="[60]"></a>InitInputCaptureWT1</STRONG> (Thumb, 170 bytes, Stack size 0 bytes, spectrexbee.o(i.InitInputCaptureWT1))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
+<LI>Call Chain = InitInputCaptureWT1 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+</UL>
+
+<P><STRONG><a name="[64]"></a>InitUART</STRONG> (Thumb, 158 bytes, Stack size 0 bytes, spectrexbee.o(i.InitUART))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
+<LI>Call Chain = InitUART &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitSpectreXbee
+</UL>
+
+<P><STRONG><a name="[69]"></a>LoadUpConfirmation</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, spectrexbee.o(i.LoadUpConfirmation))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = LoadUpConfirmation &rArr; checkSum
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkSum
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[6b]"></a>LoadUpStatus</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, spectrexbee.o(i.LoadUpStatus))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = LoadUpStatus &rArr; checkSum
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkSum
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[77]"></a>SendXbeeData</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, spectrexbee.o(i.SendXbeeData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SendXbeeData &rArr; UART1InterruptResponse &rArr; PostCommRxSM &rArr; ES_PostToService &rArr; ES_EnQueueFIFO
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1InterruptResponse
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[76]"></a>importData</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, spectrexbee.o(i.importData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = importData
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetRxData
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunSpectreXbee
+</UL>
+
+<P><STRONG><a name="[4b]"></a>DuringTransferring</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, wtv020sdservice.o(i.DuringTransferring))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = DuringTransferring
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetTimerMicroS
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ES_Timer_InitTimer
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunWTV
+</UL>
+
+<P><STRONG><a name="[66]"></a>InitWideTimer0</STRONG> (Thumb, 92 bytes, Stack size 0 bytes, wtv020sdservice.o(i.InitWideTimer0))
+<BR><BR>[Called By]<UL><LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitWTV
+</UL>
+
+<P><STRONG><a name="[4c]"></a>SetTimerMicroS</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, wtv020sdservice.o(i.SetTimerMicroS))
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DuringTransferring
+</UL>
+
+<P><STRONG><a name="[6e]"></a>importControl</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, motordriver.o(i.importControl))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = importControl &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCommands
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+</UL>
+
+<P><STRONG><a name="[74]"></a>writeOrient</STRONG> (Thumb, 154 bytes, Stack size 24 bytes, motordriver.o(i.writeOrient))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = writeOrient &rArr; __aeabi_d2uiz
+</UL>
+<BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+</UL>
+
+<P><STRONG><a name="[6f]"></a>writeThrust</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, motordriver.o(i.writeThrust))
+<BR><BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunMotorDriver
+</UL>
+
+<P><STRONG><a name="[3]"></a>NmiSR</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NmiSR
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NmiSR
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[4]"></a>FaultISR</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FaultISR
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FaultISR
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[5]"></a>IntDefaultHandler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntDefaultHandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntDefaultHandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[95]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
+</UL>
+
+<P><STRONG><a name="[8e]"></a>_dsub1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+</UL>
+
+<P><STRONG><a name="[d]"></a>_printf_input_char</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, _printf_char_common.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> _printf_char_common.o(.text)
+</UL><P>
+<H3>
+Undefined Global Symbols
+</H3><HR></body></html>

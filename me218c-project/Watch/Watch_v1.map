@@ -1,0 +1,76 @@
+MPLINK 4.38, Linker
+Linker Map File - Created Wed May 13 19:29:23 2015
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000236
+  .config_2007_WATCH_V1.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00011e      
+                            0x002007    0x002007      
+            285 out of 4359 program addresses used, program memory utilization is 6%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    EIGHT   0x0000a7    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                   ELEVEN   0x0000d1    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     FIVE   0x00007d    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     FOUR   0x00006f    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      ISR   0x0000f4    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     Main   0x000005    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                Main_Loop   0x000039    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     NINE   0x0000b5    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+               ONE_OCLOCK   0x000048    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      POP   0x000117    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     PUSH   0x0000f4    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                       RC   0x000103    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                 RESPONSE   0x0000fb    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                 SET_TIME   0x0000ee    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                    SEVEN   0x000099    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      SIX   0x00008b    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      TEN   0x0000c3    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                    THREE   0x000061    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                 TRANSMIT   0x0000f1    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                   TWELVE   0x0000df    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+               TWO_OCLOCK   0x000053    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Main   0x000005    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                Main_Loop   0x000039    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+               ONE_OCLOCK   0x000048    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+               TWO_OCLOCK   0x000053    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                    THREE   0x000061    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     FOUR   0x00006f    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     FIVE   0x00007d    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      SIX   0x00008b    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                    SEVEN   0x000099    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                    EIGHT   0x0000a7    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     NINE   0x0000b5    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      TEN   0x0000c3    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                   ELEVEN   0x0000d1    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                   TWELVE   0x0000df    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                 SET_TIME   0x0000ee    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                 TRANSMIT   0x0000f1    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                     PUSH   0x0000f4    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      ISR   0x0000f4    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                 RESPONSE   0x0000fb    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                       RC   0x000103    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+                      POP   0x000117    program     static U:\efritz\My Documents\projectC\Watch PIC Code\Watch_v1.asm
+
+

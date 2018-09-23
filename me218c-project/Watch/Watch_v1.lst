@@ -1,0 +1,1112 @@
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+                      00002 ;       PIC_network.asm
+                      00003 ;       
+                      00004 ;       Purpose: This code allows for a pic to communicate with our patented
+                      00005 ;       Team Five Booo protocol. Each device on the network must have a unique 
+                      00006 ;       address, defined as MY_ADDR. Whenever a device writes to that address
+                      00007 ;       the PIC will read the message and light the appropriate LEDs
+                      00008 ;       
+                      00009 ;
+                      00010 ;       Written by: Alex Yee    4/22/2015
+                      00011 ;                               Eric Fritz  4/23/2015
+                      00012 ;
+                      00013 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+                      00014 
+                      00015     list P=PIC16F690
+                      00016     #include "p16f690.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F690 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2010 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00739         LIST
+                      00017     ;__config(_CP_OFF & _WDT_OFF & _PWRTE_ON & _HS_OSC & _BOR_ON & _MCLRE_OFF)
+2007   3FD2           00018         __config(_CP_OFF & _WDT_OFF & _HS_OSC & _BOR_ON & _MCLRE_OFF)
+                      00019 
+                      00020     ERRORLEVEL  -302
+                      00021 
+                      00022 #define MY_ADDR 0x40        ;Address could be 40,C0,80,00
+                      00023 #define ADDR_MASK 0xC0      ;b'11000000', location of the address bits on the message byte
+                      00024 #define DATA_MASK 0x38      ;b'00111000', we don't use this, but these bits are the data
+                      00025 #define ADC_SEGMENT     0x11
+                      00026  
+                      00027 ; Variable locations in memory
+                      00028     CBLOCK  0x20
+  00000020            00029         WREG_TEMP,PCLATH_TEMP
+  00000022            00030     STATUS_TEMP,RC_DATA
+  00000024            00031         RESULTHI, RESULTLO
+Warning[210]: Extra ","
+  00000026            00032         CUR_TIME, RANGE_H,
+  00000028            00033         RANGE_L, IDX_TIME
+                      00034     ENDC
+                      00035 
+                      00036 ; Start Code
+0000                  00037     ORG     0
+0000   2805           00038     GOTO    Main
+0004                  00039     ORG     4
+0004   28F4           00040     GOTO    ISR
+                      00041 
+                      00042 ; Main code
+0005                  00043 Main:
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044 
+                      00045 ; Initialize Variables
+0005   3000           00046     MOVLW   0x00                    ;Initialize all the vars to 0
+0006   00A3           00047     MOVWF   RC_DATA
+0007   00A0           00048         MOVWF   WREG_TEMP
+0008   00A1           00049         MOVWF   PCLATH_TEMP
+0009   00A2           00050         MOVWF   STATUS_TEMP
+000A   00A6           00051         MOVWF   CUR_TIME
+000B   00A7           00052         MOVWF   RANGE_H
+000C   00A8           00053         MOVWF   RANGE_L
+000D   00A9           00054         MOVWF   IDX_TIME
+                      00055 
+                      00056 ; Set up the ports as needed
+                      00057     ; Clear ANSEL
+000E   1283 1703      00058         BANKSEL ANSEL           ;Bank 2
+0010   019E           00059     CLRF    ANSEL           ;Make all outputs digital
+                      00060     
+                      00061     ; Clear ports
+0011   0185           00062         CLRF    PORTA           ;Init PORTA 
+0012   0186           00063         CLRF    PORTB           ;Init PORTB 
+0013   0187           00064         CLRF    PORTC           ;Init PORTC 
+                      00065 
+                      00066     ; Enable Interrupts on PB6 while we're in Bank 2
+0014   1716           00067     BSF     IOCB,RB6
+                      00068 
+                      00069     ; Configure outputs (A4, B7, C0-C2)
+                      00070 
+0015   1683 1303      00071     BANKSEL TRISC           ;Bank 1
+0017   30FF           00072     MOVLW   0xFF                    ;b'11111111'
+                      00073         ;MOVWF   TRISC          ;Set all C ports as inputs
+0018   1386           00074         BCF             TRISB,7         ;Set B7 as output for EUSART    
+0019   1205           00075         BCF             TRISA,4         ;Set A4 as output for clock             
+                      00076 
+                      00077 ; Configure EUSART
+                      00078     ; Set baud rate to 9600 (0.16% error if SYNC = 0, BRG16 = 0, and BRGH = 1: equ = F_OSC/(16(x+1)))
+001A   3081           00079     MOVLW   0x81                ;Value of 129 b'10000001'                                       
+001B   0099           00080     MOVWF   SPBRG               ;This should set us to Baud=~9600
+                      00081     ; Enable asynchronous serial port, enable transmission
+001C   3024           00082     MOVLW   0x24                ;Move b'00100100' TXEN=1,SYNC=0,BRGH=1 (high speed baud mode) 
+001D   0098           00083     MOVWF   TXSTA               ;
+001E   3000           00084     MOVLW   0x00                ;b'00000000' BRG16=0,SCKP=1: enables idle high
+001F   009B           00085     MOVWF   BAUDCTL             ;
+                      00086     ; Enable reception
+0020   1283           00087     BCF     STATUS,RP0      ;bank 0
+0021   3090           00088     MOVLW   0x90                ;b'10010000' SPEN=1;CREN=1
+0022   0098           00089     MOVWF   RCSTA               ;
+                      00090         
+                      00091     ; Enable interrupts
+0023   178B           00092     BSF     INTCON,GIE      ;Global interrupt enable
+0024   170B           00093     BSF     INTCON,PEIE     ;Peripheral interrupt enable
+0025   158B           00094     BSF     INTCON,RABIE    ;Port A/B Change interrupt enable
+                      00095 
+0026   1683 1303      00096     BANKSEL PIE1            ;move to bank 1 real quick
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0028   168C           00097     BSF     PIE1,RCIE       ;Receiving interrupt enable
+0029   081A           00098     MOVF    RCREG,W         ;clear the flag for good measure
+002A   1283           00099     BCF     STATUS,RP0      ;and return to bank 0
+                      00100 
+                      00101 ;********************BEFORE *******************************
+                      00102 ;       ;This code block configures the ADC
+                      00103 ;       ;for polling, Vdd reference, Frc clock
+                      00104 ;       ;and AN4 input.
+                      00105 ;       ;
+                      00106 ;       ;Conversion start & polling for completion 
+                      00107 ;       ; are included.
+                      00108 ;       ;
+                      00109 ;       BANKSEL ADCON1 ;
+                      00110 ;       MOVLW   0x50   ;B’01010000’ -- ADC read at Fosc/16
+                      00111 ;       MOVWF ADCON1 ;
+                      00112 ;       BANKSEL TRISC ;
+                      00113 ;       BSF TRISC,0 ;Set RC0 to input
+                      00114 ;       BANKSEL ANSEL ;
+                      00115 ;       BSF ANSEL,4 ;Set RC0 to analog
+                      00116 ;       BANKSEL ADCON0 ;
+                      00117 ;       MOVLW   0xD1    ; B’11010001’ ;Right justify,
+                      00118 ;       MOVWF ADCON0 ; Vref RA1, AN4 (PC0), turn On
+                      00119 ;       ;CALL SampleTime ;Acquisiton delay
+                      00120 ;       MOVLW   0xD1
+                      00121 ;       MOVLW   0xD1
+                      00122 ;       MOVLW   0xD1
+                      00123 ;       MOVLW   0xD1
+                      00124 ;       MOVLW   0xD1
+                      00125 ;       MOVLW   0xD1
+                      00126 ;       MOVLW   0xD1
+                      00127 ;       MOVLW   0xD1
+                      00128 ;       MOVLW   0xD1
+                      00129 ;       MOVLW   0xD1
+                      00130 
+                      00131         ;This code block configures the ADC
+                      00132         ;for polling, Vdd reference, Frc clock
+                      00133         ;and AN0 input.
+                      00134         ;
+                      00135         ;Conversion start & polling for completion 
+                      00136         ; are included.
+                      00137         ;
+002B   1683 1303      00138         BANKSEL ADCON1 ;
+                      00139         ;MOVLW 0x70 ;B’01110000’ ;ADC Frc clock
+002D   3060           00140         MOVLW 0x60
+002E   009F           00141         MOVWF ADCON1 ;
+002F   1683 1303      00142         BANKSEL TRISA ;
+0031   1405           00143         BSF TRISA,0 ;Set RA0 to input
+0032   1283 1703      00144         BANKSEL ANSEL ;
+0034   141E           00145         BSF ANSEL,0 ;Set RA0 to analog
+0035   1283 1303      00146         BANKSEL ADCON0 ;
+0037   3001           00147         MOVLW 0x01;     B’00000001’ ;Left justify,
+0038   009F           00148         MOVWF ADCON0 ; Vdd Vref, AN0, On
+                      00149 
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0039                  00150 Main_Loop:
+                      00151     
+                      00152 ;       *****************Before CODE*******************
+                      00153 ;    BSF ADCON0,GO ;Start conversion
+                      00154 ;       BTFSC ADCON0,GO ;Is conversion done?
+                      00155 ;       GOTO $-1 ;No, test again
+                      00156 ;       BANKSEL ADRESH ;
+                      00157 ;       MOVF ADRESH,W ;Read upper 2 bits
+                      00158 ;       MOVWF RESULTHI ;store in GPR space
+                      00159 ;;      BANKSEL ADRESL ;
+                      00160 ;;      BANKSEL WDTCON ;
+                      00161 ;       MOVF ADRESL,W ;Read lower 8 bits
+                      00162 ;       MOVWF RESULTLO ;Store in GPR space
+                      00163 ;
+                      00164 ;       ; Now do a test to see if we are above or below a threshold
+                      00165 ;       MOVLW   0x0A;
+                      00166 ;       ;MOVF   RESULTHI,W
+                      00167 ;       SUBWF   RESULTHI,W
+                      00168 ;       BTFSS   STATUS,C
+                      00169 ;       GOTO    TRANSMIT
+                      00170 
+0039   149F           00171         BSF ADCON0,GO ;Start conversion
+003A   189F           00172         BTFSC ADCON0,GO ;Is conversion done?
+003B   283A           00173         GOTO $-1 ;No, test again
+003C   1283 1303      00174         BANKSEL ADRESH ;
+003E   081E           00175         MOVF ADRESH,W ;Read upper 2 bits
+003F   1283 1303      00176         BANKSEL RESULTLO
+0041   00A5           00177         MOVWF RESULTLO ;store in GPR space
+                      00178 ;       BANKSEL ADRESL ;
+                      00179 ;       MOVF ADRESL,W ;Read lower 8 bits
+                      00180 ;       BANKSEL RESULTLO
+                      00181 ;       MOVWF RESULTLO ;Store in GPR space
+                      00182 
+                      00183         ; Now Check what time this corresponds to
+0042   1283 1303      00184         BANKSEL RANGE_L ; First banksel
+0044   3000           00185         MOVLW   0x00            ; Reset RANGE to be 0x00
+0045   00A8           00186         MOVWF   RANGE_L
+0046   3011           00187         MOVLW   ADC_SEGMENT             ; Reset RANGE_H to be 0x15
+0047   00A7           00188         MOVWF   RANGE_H
+                      00189 
+0048                  00190 ONE_OCLOCK:
+0048   3001           00191         MOVLW   0x01            ;1 o clock
+0049   00A9           00192         MOVWF   IDX_TIME        ;First see if it's one o clock:
+004A   0828           00193         MOVF    RANGE_L,W               ;Move 0x00 into W
+004B   0225           00194         SUBWF   RESULTLO,W ; If W<F, C=1;
+004C   1C03           00195         BTFSS   STATUS,C ; If W<F (C=1) skip
+004D   2853           00196         GOTO    TWO_OCLOCK      ;If W>F, check a new range
+004E   0827           00197         MOVF    RANGE_H,W       ;Move 0x10 into W
+004F   0225           00198         SUBWF   RESULTLO,W ; If W>F, C=0;
+0050   1803           00199         BTFSC   STATUS,C ; If W<F (C=1) skip
+0051   2853           00200         GOTO    TWO_OCLOCK
+0052   28EE           00201         GOTO    SET_TIME        ; it must be 1 o clock!
+                      00202 
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0053                  00203 TWO_OCLOCK:
+0053   3011           00204         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+0054   0728           00205         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+0055   07A7           00206         ADDWF   RANGE_H,RANGE_H
+0056   3002           00207         MOVLW   0x02            ;2 o clock
+0057   00A9           00208         MOVWF   IDX_TIME        
+0058   0828           00209         MOVF    RANGE_L,W               
+0059   0225           00210         SUBWF   RESULTLO,W ; If W<F, C=1;
+005A   1C03           00211         BTFSS   STATUS,C ; If W<F (C=1) skip
+005B   2861           00212         GOTO    THREE   ;If W>F, check a new range
+005C   0827           00213         MOVF    RANGE_H,W       ;Move 0x15 into W
+005D   0225           00214         SUBWF   RESULTLO,W ; If W>F, C=0;
+005E   1803           00215         BTFSC   STATUS,C ; If W<F (C=1) skip
+005F   2861           00216         GOTO    THREE
+0060   28EE           00217         GOTO    SET_TIME
+                      00218 
+0061                  00219 THREE:
+0061   3011           00220         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+0062   0728           00221         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+0063   07A7           00222         ADDWF   RANGE_H,RANGE_H
+0064   3003           00223         MOVLW   0x03            ;2 o clock
+0065   00A9           00224         MOVWF   IDX_TIME        
+0066   0828           00225         MOVF    RANGE_L,W               
+0067   0225           00226         SUBWF   RESULTLO,W ; If W<F, C=1;
+0068   1C03           00227         BTFSS   STATUS,C ; If W<F (C=1) skip
+0069   286F           00228         GOTO    FOUR    ;If W>F, check a new range
+006A   0827           00229         MOVF    RANGE_H,W       ;Move 0x15 into W
+006B   0225           00230         SUBWF   RESULTLO,W ; If W>F, C=0;
+006C   1803           00231         BTFSC   STATUS,C ; If W<F (C=1) skip
+006D   286F           00232         GOTO    FOUR
+006E   28EE           00233         GOTO    SET_TIME        
+                      00234 
+006F                  00235 FOUR:
+006F   3011           00236         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+0070   0728           00237         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+0071   07A7           00238         ADDWF   RANGE_H,RANGE_H
+0072   3004           00239         MOVLW   0x04            ;2 o clock
+0073   00A9           00240         MOVWF   IDX_TIME        
+0074   0828           00241         MOVF    RANGE_L,W               
+0075   0225           00242         SUBWF   RESULTLO,W ; If W<F, C=1;
+0076   1C03           00243         BTFSS   STATUS,C ; If W<F (C=1) skip
+0077   287D           00244         GOTO    FIVE    ;If W>F, check a new range
+0078   0827           00245         MOVF    RANGE_H,W       ;Move 0x15 into W
+0079   0225           00246         SUBWF   RESULTLO,W ; If W>F, C=0;
+007A   1803           00247         BTFSC   STATUS,C ; If W<F (C=1) skip
+007B   287D           00248         GOTO    FIVE
+007C   28EE           00249         GOTO    SET_TIME        
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00250 
+007D                  00251 FIVE:
+007D   3011           00252         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+007E   0728           00253         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+007F   07A7           00254         ADDWF   RANGE_H,RANGE_H
+0080   3005           00255         MOVLW   0x05            ;2 o clock
+0081   00A9           00256         MOVWF   IDX_TIME        
+0082   0828           00257         MOVF    RANGE_L,W               
+0083   0225           00258         SUBWF   RESULTLO,W ; If W<F, C=1;
+0084   1C03           00259         BTFSS   STATUS,C ; If W<F (C=1) skip
+0085   288B           00260         GOTO    SIX     ;If W>F, check a new range
+0086   0827           00261         MOVF    RANGE_H,W       ;Move 0x15 into W
+0087   0225           00262         SUBWF   RESULTLO,W ; If W>F, C=0;
+0088   1803           00263         BTFSC   STATUS,C ; If W<F (C=1) skip
+0089   288B           00264         GOTO    SIX
+008A   28EE           00265         GOTO    SET_TIME        
+                      00266 
+008B                  00267 SIX:
+008B   3011           00268         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+008C   0728           00269         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+008D   07A7           00270         ADDWF   RANGE_H,RANGE_H
+008E   3006           00271         MOVLW   0x06            ;2 o clock
+008F   00A9           00272         MOVWF   IDX_TIME        
+0090   0828           00273         MOVF    RANGE_L,W               
+0091   0225           00274         SUBWF   RESULTLO,W ; If W<F, C=1;
+0092   1C03           00275         BTFSS   STATUS,C ; If W<F (C=1) skip
+0093   2899           00276         GOTO    SEVEN   ;If W>F, check a new range
+0094   0827           00277         MOVF    RANGE_H,W       ;Move 0x15 into W
+0095   0225           00278         SUBWF   RESULTLO,W ; If W>F, C=0;
+0096   1803           00279         BTFSC   STATUS,C ; If W<F (C=1) skip
+0097   2899           00280         GOTO    SEVEN
+0098   28EE           00281         GOTO    SET_TIME        
+                      00282 
+0099                  00283 SEVEN:
+0099   3011           00284         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+009A   0728           00285         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+009B   07A7           00286         ADDWF   RANGE_H,RANGE_H
+009C   3007           00287         MOVLW   0x07            ;2 o clock
+009D   00A9           00288         MOVWF   IDX_TIME        
+009E   0828           00289         MOVF    RANGE_L,W               
+009F   0225           00290         SUBWF   RESULTLO,W ; If W<F, C=1;
+00A0   1C03           00291         BTFSS   STATUS,C ; If W<F (C=1) skip
+00A1   28A7           00292         GOTO    EIGHT   ;If W>F, check a new range
+00A2   0827           00293         MOVF    RANGE_H,W       ;Move 0x15 into W
+00A3   0225           00294         SUBWF   RESULTLO,W ; If W>F, C=0;
+00A4   1803           00295         BTFSC   STATUS,C ; If W<F (C=1) skip
+00A5   28A7           00296         GOTO    EIGHT
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A6   28EE           00297         GOTO    SET_TIME        
+                      00298 
+00A7                  00299 EIGHT:
+00A7   3011           00300         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+00A8   0728           00301         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+00A9   07A7           00302         ADDWF   RANGE_H,RANGE_H
+00AA   3008           00303         MOVLW   0x08            ;2 o clock
+00AB   00A9           00304         MOVWF   IDX_TIME        
+00AC   0828           00305         MOVF    RANGE_L,W               
+00AD   0225           00306         SUBWF   RESULTLO,W ; If W<F, C=1;
+00AE   1C03           00307         BTFSS   STATUS,C ; If W<F (C=1) skip
+00AF   28B5           00308         GOTO    NINE    ;If W>F, check a new range
+00B0   0827           00309         MOVF    RANGE_H,W       ;Move 0x15 into W
+00B1   0225           00310         SUBWF   RESULTLO,W ; If W>F, C=0;
+00B2   1803           00311         BTFSC   STATUS,C ; If W<F (C=1) skip
+00B3   28B5           00312         GOTO    NINE
+00B4   28EE           00313         GOTO    SET_TIME        
+                      00314 
+00B5                  00315 NINE:
+00B5   3011           00316         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+00B6   0728           00317         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+00B7   07A7           00318         ADDWF   RANGE_H,RANGE_H
+00B8   3009           00319         MOVLW   0x09            ;2 o clock
+00B9   00A9           00320         MOVWF   IDX_TIME        
+00BA   0828           00321         MOVF    RANGE_L,W               
+00BB   0225           00322         SUBWF   RESULTLO,W ; If W<F, C=1;
+00BC   1C03           00323         BTFSS   STATUS,C ; If W<F (C=1) skip
+00BD   28C3           00324         GOTO    TEN     ;If W>F, check a new range
+00BE   0827           00325         MOVF    RANGE_H,W       ;Move 0x15 into W
+00BF   0225           00326         SUBWF   RESULTLO,W ; If W>F, C=0;
+00C0   1803           00327         BTFSC   STATUS,C ; If W<F (C=1) skip
+00C1   28C3           00328         GOTO    TEN
+00C2   28EE           00329         GOTO    SET_TIME        
+                      00330 
+00C3                  00331 TEN:
+00C3   3011           00332         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+00C4   0728           00333         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+00C5   07A7           00334         ADDWF   RANGE_H,RANGE_H
+00C6   300A           00335         MOVLW   0x0A            ;2 o clock
+00C7   00A9           00336         MOVWF   IDX_TIME        
+00C8   0828           00337         MOVF    RANGE_L,W               
+00C9   0225           00338         SUBWF   RESULTLO,W ; If W<F, C=1;
+00CA   1C03           00339         BTFSS   STATUS,C ; If W<F (C=1) skip
+00CB   28D1           00340         GOTO    ELEVEN  ;If W>F, check a new range
+00CC   0827           00341         MOVF    RANGE_H,W       ;Move 0x15 into W
+00CD   0225           00342         SUBWF   RESULTLO,W ; If W>F, C=0;
+00CE   1803           00343         BTFSC   STATUS,C ; If W<F (C=1) skip
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00CF   28D1           00344         GOTO    ELEVEN
+00D0   28EE           00345         GOTO    SET_TIME        
+                      00346 
+00D1                  00347 ELEVEN:
+00D1   3011           00348         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+00D2   0728           00349         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+00D3   07A7           00350         ADDWF   RANGE_H,RANGE_H
+00D4   300B           00351         MOVLW   0x0B            ;2 o clock
+00D5   00A9           00352         MOVWF   IDX_TIME        
+00D6   0828           00353         MOVF    RANGE_L,W               
+00D7   0225           00354         SUBWF   RESULTLO,W ; If W<F, C=1;
+00D8   1C03           00355         BTFSS   STATUS,C ; If W<F (C=1) skip
+00D9   28DF           00356         GOTO    TWELVE  ;If W>F, check a new range
+00DA   0827           00357         MOVF    RANGE_H,W       ;Move 0x15 into W
+00DB   0225           00358         SUBWF   RESULTLO,W ; If W>F, C=0;
+00DC   1803           00359         BTFSC   STATUS,C ; If W<F (C=1) skip
+00DD   28DF           00360         GOTO    TWELVE
+00DE   28EE           00361         GOTO    SET_TIME        
+                      00362 
+00DF                  00363 TWELVE:
+00DF   3011           00364         MOVLW   ADC_SEGMENT             ; we will add 0x15 to our ranges
+Warning[202]: Argument out of range.  Least significant bits used.
+00E0   0728           00365         ADDWF   RANGE_L,RANGE_L
+Warning[202]: Argument out of range.  Least significant bits used.
+00E1   07A7           00366         ADDWF   RANGE_H,RANGE_H
+00E2   300C           00367         MOVLW   0x0C            ;2 o clock
+00E3   00A9           00368         MOVWF   IDX_TIME        
+00E4   0828           00369         MOVF    RANGE_L,W               
+00E5   0225           00370         SUBWF   RESULTLO,W ; If W<F, C=1;
+00E6   1C03           00371         BTFSS   STATUS,C ; If W<F (C=1) skip
+00E7   2839           00372         GOTO    Main_Loop       ;If W>F, check a new range
+00E8   0827           00373         MOVF    RANGE_H,W       ;Move 0x15 into W
+00E9   0225           00374         SUBWF   RESULTLO,W ; If W>F, C=0;
+00EA   1803           00375         BTFSC   STATUS,C ; If W<F (C=1) skip
+00EB   2839           00376         GOTO    Main_Loop
+00EC   28EE           00377         GOTO    SET_TIME        
+                      00378 
+                      00379 ;
+                      00380 ;       MOVLW   0x0C            ;12 o clock
+                      00381 ;       MOVWF   IDX_TIME        ;First see if it's one o clock:
+                      00382 ;       MOVF    IDX_RANGE,W     
+                      00383 ;       ADDLW   0x15    ; Increments of 21 (12x21 = ~255)
+                      00384 ;       MOVWF   IDX_RANGE ;Store current value of ranges we are checking
+                      00385 ;       SUBWF   RESULTLO,W ; If W<F, C=1;
+                      00386 ;       BTFSC   STATUS,C ; If W<F skip
+                      00387 ;       GOTO    SET_TIME
+                      00388 
+                      00389         ; Now do a test to see if we are above or below a threshold
+                      00390 ;               MOVLW   0xFF;
+                      00391 ;               ;MOVF   RESULTHI,W
+                      00392 ;               SUBWF   RESULTLO,W ; If W>F, C=0;
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00393 ;               BTFSC   STATUS,C ; If W>F skip
+                      00394 ;               GOTO    TRANSMIT
+                      00395 
+00ED   2839           00396     GOTO    Main_Loop
+                      00397 
+00EE                  00398 SET_TIME:       
+00EE   0829           00399         MOVF    IDX_TIME,W
+00EF   00A6           00400         MOVWF   CUR_TIME
+                      00401         ;GOTO   TRANSMIT
+00F0   2839           00402         GOTO    Main_Loop
+                      00403 
+00F1                  00404 TRANSMIT:
+00F1   0826           00405         MOVF   CUR_TIME,W               ;load inputs into w
+                      00406         ;MOVLW  0x0A
+00F2   0099           00407     MOVWF   TXREG           ;transmit the file
+00F3   2839           00408         GOTO    Main_Loop
+                      00409 
+00F4                  00410 ISR:  
+00F4                  00411 PUSH: ; Pushing registers to memory
+00F4   00A0           00412     MOVWF   WREG_TEMP       ;save our current W
+00F5   0803           00413     MOVF    STATUS,W        ;move STATUS to W
+00F6   0183           00414     CLRF    STATUS          ;bank 0
+00F7   00A2           00415     MOVWF   STATUS_TEMP     ;save STATUS value
+00F8   080A           00416     MOVF    PCLATH,W        ;move PCLATH to W
+00F9   00A1           00417     MOVWF   PCLATH_TEMP     ;save PCLATH value
+00FA   018A           00418     CLRF    PCLATH          ;page 0
+                      00419         
+00FB                  00420 RESPONSE:    
+                      00421     ; Button pressed case
+00FB   1C0B           00422     BTFSS   INTCON,RABIF        ;check to see if the interrupt flag is high
+00FC   2903           00423     GOTO    RC                          ;skip if not
+00FD   100B           00424     BCF     INTCON,RABIF    ;clear the flag
+00FE   1F06           00425     BTFSS   PORTB,6         ;clears the mismatch, AND checks the bit
+00FF   2917           00426     GOTO    POP             ;if it was clear, skip. only a button press sends data
+0100   0826           00427     MOVF    CUR_TIME,W         ;load inputs into w
+0101   0099           00428     MOVWF   TXREG           ;transmit the file 
+0102   2917           00429     GOTO    POP             ;exit the ISR
+                      00430 
+0103                  00431 RC: 
+                      00432     ; Transmission received case
+0103   1E8C           00433     BTFSS   PIR1,RCIF       ;test receive interrupt flag
+0104   2917           00434     GOTO    POP             ;if clear, exit ISR
+0105   081A           00435     MOVF    RCREG,W
+0106   00A3           00436     MOVWF   RC_DATA         ;move received data to RC_DATA
+0107   39C0           00437     ANDLW   ADDR_MASK       ;Mask W with the address mask
+0108   3A40           00438     XORLW   MY_ADDR         ;XOR to see if the addresses are the same
+0109   1D03           00439     BTFSS   STATUS,Z        ;Check to see if the message was calling on us
+010A   2917           00440     GOTO    POP             ;Addresses were not same
+                      00441 
+                      00442  ; Map output pin 0 to input pin 5
+010B   1EA3           00443     BTFSS   RC_DATA,RC5     
+010C   1007           00444     BCF     PORTC,RC0
+010D   1AA3           00445     BTFSC   RC_DATA,RC5
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+010E   1407           00446     BSF     PORTC,RC0
+                      00447     
+                      00448     ; Map output pin 1 to input pin 4
+010F   1E23           00449     BTFSS   RC_DATA,RC4
+0110   1087           00450     BCF     PORTC,RC1
+0111   1A23           00451     BTFSC   RC_DATA,RC4
+0112   1487           00452     BSF     PORTC,RC1
+                      00453     
+                      00454     ; Map output pin 2 to input pin 3
+0113   1DA3           00455     BTFSS   RC_DATA,RC3
+0114   1107           00456     BCF     PORTC,RC2
+0115   19A3           00457     BTFSC   RC_DATA,RC3
+0116   1507           00458     BSF     PORTC,RC2
+                      00459 
+                      00460 
+0117                  00461 POP: ; Popping values back into their rightful place
+0117   0183           00462     CLRF    STATUS          ;bank 0
+0118   0821           00463     MOVF    PCLATH_TEMP,W   ;store saved PCLATH value in W
+0119   008A           00464     MOVWF   PCLATH          ;restore PCLATH
+011A   0822           00465     MOVF    STATUS_TEMP,W   ;store saved STATUS value in W
+011B   0083           00466     MOVWF   STATUS          ;restore STATUS
+011C   0EA0           00467     SWAPF   WREG_TEMP,F     ;prepare W to be restored
+011D   0E20           00468     SWAPF   WREG_TEMP,W     ;restore W keeping status bits
+011E   0009           00469     RETFIE
+                      00470     
+                      00471 
+                      00472     END
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADC_SEGMENT                       0x11
+ADDEN                             00000003
+ADDR_MASK                         0xC0
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             0000011E
+ANSELH                            0000011F
+BAUDCTL                           0000009B
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SEN                             00000005
+C1VREN                            00000007
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2SYNC                            00000000
+C2VREN                            00000006
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CM1CON0                           00000119
+CM2CON0                           0000011A
+CM2CON1                           0000011B
+CREN                              00000004
+CSRC                              00000007
+CUR_TIME                          00000026
+D                                 00000005
+DATA_ADDRESS                      00000005
+DATA_MASK                         0x38
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000001D
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+EIGHT                             000000A7
+ELEVEN                            000000D1
+F                                 00000001
+FERR                              00000002
+FIVE                              0000007D
+FOUR                              0000006F
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IDX_TIME                          00000029
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IOCB                              00000116
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+ISR                               000000F4
+LTS                               00000001
+MC1OUT                            00000007
+MC2OUT                            00000006
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+MY_ADDR                           0x40
+Main                              00000005
+Main_Loop                         00000039
+NINE                              000000B5
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RABPU                         00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+ONE_OCLOCK                        00000048
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_TEMP                       00000021
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+POP                               00000117
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000019D
+PULSR                             00000002
+PULSS                             00000003
+PUSH                              000000F4
+PWM1CON                           0000001C
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RABIE                             00000003
+RABIF                             00000000
+RANGE_H                           00000027
+RANGE_L                           00000028
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC                                00000103
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RCSTA                             00000018
+RC_DATA                           00000023
+RD                                00000000
+READ_WRITE                        00000002
+RESPONSE                          000000FB
+RESULTHI                          00000024
+RESULTLO                          00000025
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SENB                              00000003
+SENDB                             00000003
+SET_TIME                          000000EE
+SEVEN                             00000099
+SIX                               0000008B
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             0000019E
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STATUS_TEMP                       00000022
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSS                             00000001
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+T2IE                              00000001
+T2IF                              00000001
+TEN                               000000C3
+THREE                             00000061
+TMR0                              00000001
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRANSMIT                          000000F1
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TWELVE                            000000DF
+TWO_OCLOCK                        00000053
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+VCFG                              00000006
+VP6EN                             00000004
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000118
+VRR                               00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              00000115
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WREG_TEMP                         00000020
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+_BOD_NSLEEP                       00003EFF
+_BOD_OFF                          00003CFF
+_BOD_ON                           00003FFF
+_BOD_SBODEN                       00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__16F690                          00000001
+MPASM  5.39                      WATCH_V1.ASM   5-13-2015  19:29:22         PAGE 20
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   284
+Program Memory Words Free:  3812
+
+
+Errors   :     0
+Warnings :    23 reported,     0 suppressed
+Messages :     0 reported,    11 suppressed
+
+

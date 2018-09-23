@@ -1,0 +1,78 @@
+MPLINK 4.38, Linker
+Linker Map File - Created Sun May 10 19:50:44 2015
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000004    program   0x000242
+  .config_2007_WATCH_V1.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x000124      
+                            0x002007    0x002007      
+            293 out of 4359 program addresses used, program memory utilization is 6%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    EIGHT   0x0000ad    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                   ELEVEN   0x0000d7    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     FIVE   0x000083    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     FOUR   0x000075    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      ISR   0x0000fa    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     Main   0x000005    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                Main_Loop   0x000039    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     NINE   0x0000bb    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+               ONE_OCLOCK   0x00004e    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      POP   0x00011d    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     PUSH   0x0000fa    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                       RC   0x000109    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                 RESPONSE   0x000101    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                 SET_TIME   0x0000f4    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                    SEVEN   0x00009f    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      SIX   0x000091    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      TEN   0x0000c9    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                    THREE   0x000067    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                 TRANSMIT   0x0000f7    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                   TWELVE   0x0000e5    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+               TWO_OCLOCK   0x000059    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+             _.org_1_003B   0x00003b    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Main   0x000005    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                Main_Loop   0x000039    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+             _.org_1_003B   0x00003b    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+               ONE_OCLOCK   0x00004e    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+               TWO_OCLOCK   0x000059    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                    THREE   0x000067    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     FOUR   0x000075    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     FIVE   0x000083    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      SIX   0x000091    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                    SEVEN   0x00009f    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                    EIGHT   0x0000ad    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     NINE   0x0000bb    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      TEN   0x0000c9    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                   ELEVEN   0x0000d7    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                   TWELVE   0x0000e5    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                 SET_TIME   0x0000f4    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                 TRANSMIT   0x0000f7    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                     PUSH   0x0000fa    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      ISR   0x0000fa    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                 RESPONSE   0x000101    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                       RC   0x000109    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+                      POP   0x00011d    program     static U:\_218c Teams\_BooTeam5\Watch PIC Code\Watch_v1.asm
+
+
